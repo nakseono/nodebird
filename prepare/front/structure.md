@@ -48,8 +48,8 @@ head title(탭 이름)을 내 프로필 | NodeBird로 만듦.
 1. AppLayout.js
 2. FollowList.js
 3. NicknameEditForm.js
-4. LoginForm.js
-5. UserProfile.js
+4. UserProfile.js
+5. LoginForm.js
 
 ## AppLayout.js
 
@@ -103,4 +103,24 @@ FollowList 와 같이 profile 페이지에 보여지는 컴포넌트이다.
 
 Input.search 를 이용해 검색창을 구현했다.
 
+## UserProfile.js
+
+로그인이 되었다면, 그러니까 `setIsLoggedIn = true` 라면 보여지는 창이다.
+
+Card 라는 antd의 컴포넌트를 이용해 전체적인 틀을 잡고 채워넣는다.
+
+딱히 특별한 내용은 아직까지 없다. -> 이후 username이라던지 각 항목의 숫자 count 등 redux를 이용해 작업할 것 같다.
+
 ## LoginForm.js
+
+화면 좌측 로그인 창을 구성하는 컴포넌트이다.
+
+`AppLayout.js`에서 만든 것 처럼, `setIsLoggedIn = false` 일 때 현재 페이지인 `LoginForm.js`가 표시된다.
+
+`useInput` 이라는 커스텀 훅을 가져와서 id와 password에 `useState`를 쓰는 것을 줄였다.
+
+`onSubmitForm`을 통해 `setIsLoggedIn = true`로 만들어준다.
+
+`FormWrapper`는 `FormWrapper = styled(form)` 를 써서 css를 먹였다.
+
+`ButtonWrapper` 도 마찬가지. 단, base는 Button이므로 `htmlType="submit"` 을 넣어서 Form에 `onFinish`를 넣도록 해준다.
