@@ -7,8 +7,8 @@ const configureStore = () => {
   const middlewares = [];
   const enhancer =
     process.env.NODE_ENV === "production"
-      ? compose(applyMiddleware(...middlewares))
-      : composeWithDevTools(applyMiddleware(...middlewares));
+      ? compose(applyMiddleware(...middlewares)) // 직접적으로 [] 이렇게 배열을 넣으면 에러난다.
+      : composeWithDevTools(applyMiddleware(...middlewares)); // 마찬가지.
   const store = createStore(reducer, enhancer);
   return store;
 };
