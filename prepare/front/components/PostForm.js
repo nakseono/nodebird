@@ -6,15 +6,19 @@ import { addPost } from "../reducers/post";
 const PostForm = () => {
   const { imagePaths } = useSelector((state) => state.post);
   const imageInput = useRef();
+
   const dispatch = useDispatch();
+
   const [text, setText] = useState("");
   const onChangeText = useCallback((e) => {
     setText(e.target.value);
   });
+
   const onSubmit = useCallback(() => {
     dispatch(addPost);
-    setText("");
+    setText(""); // 입력했던 텍스트를 지워주는 역할이다.
   }, []);
+
   const onClickImageUpLoad = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
