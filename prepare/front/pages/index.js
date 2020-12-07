@@ -10,9 +10,9 @@ const Home = () => {
   return (
     <AppLayout>
       {isLoggedIn && <PostForm />}
-      {mainPosts.map((id, post) => (
-        <PostCard key={id} post={post} />
-      ))}
+      {mainPosts.map((post) => {
+        return <PostCard key={post.id} post={post} />;
+      })}
     </AppLayout>
   );
 };
