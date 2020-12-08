@@ -204,3 +204,5 @@ mainPosts라는 state를 store에서 받아와서 id와 post라는 인자를 넘
 게시물을 적는 컴포넌트이다. 여기다가 게시물을 적고 '짹짹' 버튼을 누르면 postcard가 등록된다.
 
 post에서 addPost라는 action을 가져와서 짹짹버튼을 누르면 dispatch(reducer에 action을 통과시킨다.) 한다.
+
+현재 이상하게 state가 넘어오지 않아 오류 수정중인 상태이다.
