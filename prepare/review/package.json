@@ -1,0 +1,15 @@
+{
+  "name": "react-nodebird-front",
+  "version": "1.0.0",
+  "description": "복습을 위한 폴더",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "NakSeoNo",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^10.0.7",
+    "react": "^17.0.1"
+  }
+}
