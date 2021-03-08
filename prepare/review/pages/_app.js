@@ -1,16 +1,17 @@
 import React from "react";
+import "antd/dist/antd.css";
 import Head from "next/head";
 
-const Signup = () => {
+const NodeBird = ({ Component }) => {
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>회원가입 | NodeBird</title>
+        <title>NodeBird</title>
       </Head>
-      <div>회원가입 페이지</div>
+      <Component />
     </>
   );
 };
 
-export default Signup;
+export default NodeBird;
