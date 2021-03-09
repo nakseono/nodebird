@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
 
+import UserProfile from "../components/UserProfile";
+import LoginForm from "../components/LoginForm";
+
 const AppLayout = ({ children }) => {
   // 여기서 children은 AppLayout으로 감싸질 페이지의 내용이다..!
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div>
       <Menu mode="horizontal">
@@ -23,7 +27,7 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row>
         <Col xs={24} md={6}>
-          왼쪽 메뉴
+          {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
