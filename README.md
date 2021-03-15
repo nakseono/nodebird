@@ -7,3 +7,5 @@
 ~~[https://nodebird.com](https://nodebird.com)에서 실제 실행 결과물을 확인하실 수 있습니다.~~
 
 인프런의 NodeBird 강좌를 듣고 공부하는 공간입니다.
+
+기본적으로 Master, 현재 review 폴더로 복습중.
