@@ -5,6 +5,7 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "next-redux-wrapper": "^6.0.2",
+    "react-redux": "^7.2.3",
     "redux": "^4.0.5"
   }
 }
