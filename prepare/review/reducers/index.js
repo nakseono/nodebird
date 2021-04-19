@@ -1,29 +1,8 @@
 import { HYDRATE } from "next-redux-wrapper";
+import { combineReducers } from "redux";
 
-const initialState = {
-  user: {
-    isLoggedIn: false,
-    user: null,
-    signUpData: {},
-    loginData: {},
-  },
-  post: {
-    mainPosts: [],
-  },
-};
-
-export const loginAction = (data) => {
-  return {
-    type: "LOG_IN",
-    data,
-  };
-};
-
-export const logoutAction = () => {
-  return {
-    type: "LOG_OUT",
-  };
-};
+import user from "./user";
+import post from "./post";
 
 const changeNickname = (data) => {
   return {
@@ -32,28 +11,21 @@ const changeNickname = (data) => {
   };
 };
 
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case HYDRATE:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case "LOG_IN":
-      return {
-        ...state.user,
-        isLoggedIn: true,
-        user: action.data,
-      };
-    case "LOG_OUT":
-      return {
-        ...state.user,
-        isLoggedIn: false,
-        user: null,
-      };
-    default:
-      return state;
-  }
-};
+const rootReducer = combineReducers({
+  index: (state = {}, action) => {
+    switch (action.type) {
+      case HYDRATE: // 순전히 SSR을 위해 HYDRATE를 사용해야 하므로, 리듀서를 합쳐줄 때 index를 추가해 준 것이다.
+        return {
+          ...state,
+          ...action.payload,
+        };
+
+      default:
+        return state;
+    }
+  },
+  user,
+  post,
+});
 
 export default rootReducer;
