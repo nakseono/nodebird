@@ -1,0 +1,23 @@
+{
+  "name": "react-nodebird-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakseono/nodebird.git"
+  },
+  "author": "nakseono",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nakseono/nodebird/issues"
+  },
+  "homepage": "https://github.com/nakseono/nodebird#readme",
+  "dependencies": {
+    "next": "^10.1.3",
+    "react": "^17.0.2"
+  }
+}
