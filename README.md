@@ -4,4 +4,4 @@
 
 공부한 것 정리 : https://www.notion.so/nakseono/NodeBird-dad882e0071f48c0b56a601f565108db
 
-현재(마지막으로 공부한 강의) : 리덕스의 원리와 불변성
+현재(마지막으로 공부한 강의) : link와 eslint
