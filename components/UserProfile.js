@@ -17,7 +17,7 @@ const UserProfile = ({ setIsLoggedIn }) => {
           팔로잉
           <br />0
         </div>,
-        <div key="followers">
+        <div key="followings">
           팔로워
           <br />0
         </div>,
