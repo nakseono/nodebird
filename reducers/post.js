@@ -9,16 +9,13 @@ export const initialState = {
       content: "첫 번째 게시글 #해시태그 #익스프레스",
       Images: [
         {
-          src:
-            "https://drive.google.com/file/d/1fmxSp_STq19zxpTOx3nyYdoIG8PQkpba/view?usp=sharing",
+          src: "https://i.ibb.co/qW3395P/26.gif",
         },
         {
-          src:
-            "https://drive.google.com/file/d/1NEcJBWPhmtCk7Jg9mhbuPjIxxEq6k3pt/view?usp=sharing",
+          src: "https://i.ibb.co/v4GQkWQ/28.png",
         },
         {
-          src:
-            "https://drive.google.com/file/d/1SX1x16CSOdXz2FEgfygqWoc54uJmq05k/view?usp=sharing",
+          src: "https://i.ibb.co/k9wGr0M/20.png",
         },
       ],
       Comments: [
