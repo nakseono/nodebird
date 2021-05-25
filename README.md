@@ -1,5 +1,5 @@
-인프런의 NodeBird 강좌를 듣고 공부하는 공간
+인프런 NodeBird(React) 강좌를 듣고 공부한 것을 정리한 Repo.
 
-강좌 링크 : [링크](https://bit.ly/3w8xuQ5)
+강좌 링크 : [Link](https://bit.ly/3w8xuQ5)
 
-공부한 것 정리 : https://www.notion.so/nakseono/NodeBird-dad882e0071f48c0b56a601f565108db
+공부한 것 정리 : [Link](https://bit.ly/3wiieQO)
