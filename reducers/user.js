@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const initialState = {
   isLoggedIn: false,
   me: null,
