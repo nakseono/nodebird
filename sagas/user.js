@@ -40,7 +40,7 @@ function logInAPI(data) {
 //! <------------ 로그인 ------------>
 
 function* watchLogOut() {
-  yield takeLatest(LOG_IN_REQUEST, logOut);
+  yield takeLatest(LOG_OUT_REQUEST, logOut);
 }
 
 function* logOut() {
