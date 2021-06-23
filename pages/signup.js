@@ -3,19 +3,21 @@ import { Form, Input, Checkbox, Button } from "antd";
 
 import AppLayout from "../components/AppLayout";
 import useInput from "../hooks/useInput";
-
-const TextInput = ({ value }) => {
-  return <div>{value}</div>;
-};
+import { SIGN_UP_REQUEST } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signup = () => {
-  const [passwordCheck, setPasswordCheck] = useState("");
+  const dispatch = useDispatch();
+  const { signUpLoading } = useSelector((state) => state.user);
+
   const [term, setTerm] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
   const [termError, setTermError] = useState(false);
 
-  const [id, onChangeId] = useInput("");
-  const [nick, onChangeNick] = useInput("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+
+  const [email, onChangeEmail] = useInput("");
+  const [nickname, onChangeNickname] = useInput("");
   const [password, onChangePassword] = useInput("");
 
   const onSubmit = useCallback(() => {
@@ -25,7 +27,11 @@ const Signup = () => {
     if (!term) {
       return setTermError(true);
     }
-  }, [password, passwordCheck, term]);
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      data: { email, password, nickname },
+    });
+  }, [email, password, passwordCheck, term]);
 
   const onChangePasswordCheck = useCallback(
     (e) => {
@@ -45,18 +51,24 @@ const Signup = () => {
       <Form onFinish={onSubmit} style={{ padding: 10 }}>
         <TextInput value="135135" />
         <div>
-          <label htmlFor="user-id">아이디</label>
+          <label htmlFor="user-email">이메일</label>
           <br />
-          <Input name="user-id" value={id} required onChange={onChangeId} />
+          <Input
+            name="user-email"
+            value={email}
+            type="email"
+            required
+            onChange={onChangeEmail}
+          />
         </div>
         <div>
           <label htmlFor="user-nick">닉네임</label>
           <br />
           <Input
             name="user-nick"
-            value={nick}
+            value={nickname}
             required
-            onChange={onChangeNick}
+            onChange={onChangeNickname}
           />
         </div>
         <div>
@@ -93,7 +105,7 @@ const Signup = () => {
           )}
         </div>
         <div style={{ marginTop: 10 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={signUpLoading}>
             가입하기
           </Button>
         </div>
