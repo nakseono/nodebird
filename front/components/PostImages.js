@@ -5,18 +5,15 @@ import ImagesZoom from "./ImagesZoom";
 const PostImages = ({ images }) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
 
-  const onZoom = useCallback(() => {
-    setShowImagesZoom(true);
-  }, []);
-  const onClose = useCallback(() => {
-    setShowImagesZoom(false);
+  const zoomOnOff = useCallback(() => {
+    setShowImagesZoom((prevState) => !prevState);
   }, []);
 
   if (images.length === 1) {
     return (
       <>
-        <img src={(images = [0].src)} alt={images[0].src} onClick={onZoom} />
-        {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
+        <img src={(images = [0].src)} alt={images[0].src} onClick={zoomOnOff} />
+        {showImagesZoom && <ImagesZoom images={images} onClose={zoomOnOff} />}
       </>
     );
   }
@@ -28,15 +25,15 @@ const PostImages = ({ images }) => {
           src={images[0].src}
           style={{ width: "50%", display: "inline-block" }}
           alt={images[0].src}
-          onClick={onZoom}
+          onClick={zoomOnOff}
         />
         <img
           src={images[1].src}
           style={{ width: "50%", display: "inline-block" }}
           alt={images[1].src}
-          onClick={onZoom}
+          onClick={zoomOnOff}
         />
-        {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
+        {showImagesZoom && <ImagesZoom images={images} onClose={zoomOnOff} />}
       </>
     );
   }
@@ -48,7 +45,7 @@ const PostImages = ({ images }) => {
           src={images[0].src}
           style={{ width: "50%" }}
           alt={images[0].src}
-          onClick={onZoom}
+          onClick={zoomOnOff}
         />
         <div
           style={{
@@ -57,7 +54,7 @@ const PostImages = ({ images }) => {
             textAlign: "center",
             verticalAlign: "middle",
           }}
-          onClick={onZoom}
+          onClick={zoomOnOff}
         >
           <PlusOutlined />
           <br />
@@ -65,7 +62,7 @@ const PostImages = ({ images }) => {
           개의 사진 더보기
         </div>
       </div>
-      {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
+      {showImagesZoom && <ImagesZoom images={images} onClose={zoomOnOff} />}
     </>
   );
 };
