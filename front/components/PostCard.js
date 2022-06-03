@@ -94,7 +94,7 @@ const PostCard = ({ post }) => {
   );
 };
 
-PostCard.propTypes = {
+PostCard.PropTypes = {
   post: PropTypes.shape({
     id: PropTypes.number,
     User: PropTypes.object,
