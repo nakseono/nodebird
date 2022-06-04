@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button } from "antd";
 import useInput from "../hooks/useInput";
 
-import { ADD_COMMENT_REQUEST } from "../reducers";
+import { ADD_COMMENT_REQUEST } from "../reducers/post";
 
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
 
   const id = useSelector((state) => state.user.me && state.user.me.id);
-  const addCommentDone = useSelector((state) => state.post);
+  const { addCommentDone, addCommentLoading } = useSelector(
+    (state) => state.post
+  );
 
   const [commentText, onChangeCommentText, setCommentText] = useInput("");
 
@@ -26,7 +28,7 @@ const CommentForm = ({ post }) => {
       data: {
         content: commentText,
         postId: post.id,
-        userId,
+        userId: id,
         id,
       },
     });
@@ -43,7 +45,8 @@ const CommentForm = ({ post }) => {
         <Button
           type="primary"
           htmlType="submit"
-          style={{ position: "absolute", right: 0, bottom: -40, zIndex: 99 }}
+          style={{ position: "absolute", right: 0, bottom: -40, zIndex: 1 }}
+          loading={addCommentLoading}
         >
           삐약
         </Button>

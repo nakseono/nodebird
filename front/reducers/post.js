@@ -1,3 +1,5 @@
+import shortId from "shortid";
+
 export const initialState = {
   mainPosts: [
     {
@@ -61,16 +63,25 @@ export const addComment = (data) => ({
   data,
 });
 
-export const dummyPost = {
-  id: 2,
-  content: "더미데이터 입니다.",
+export const dummyPost = (data) => ({
+  id: shortId.generate(),
+  content: data,
   User: {
     id: 1,
     nickname: "이지금",
   },
   Images: [],
   Comments: [],
-};
+});
+
+const dummyComments = (data) => ({
+  id: shortId.generate(),
+  content: data,
+  User: {
+    id: 1,
+    nickname: "dlwlrma",
+  },
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -86,7 +97,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         addPostLoading: false,
         addPostDone: true,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
       };
     case ADD_POST_FAILURE:
       return {
@@ -101,8 +112,21 @@ const reducer = (state = initialState, action) => {
         addCommentError: null,
       };
     case ADD_COMMENT_SUCCESS:
+      const postIndex = state.mainPosts.findIndex(
+        (v) => v.id === action.data.postId
+      );
+
+      const post = state.mainPosts[postIndex];
+
+      const Comments = [dummyComments(action.data.content), ...post.Comments];
+
+      const mainPosts = [...state.mainPosts];
+
+      mainPosts[postIndex] = { ...post, Comments };
+
       return {
         ...state,
+        mainPosts,
         addCommentLoading: false,
         addCommentDone: true,
       };

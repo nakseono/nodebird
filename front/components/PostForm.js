@@ -9,7 +9,7 @@ const PostWrapper = styled(Form)`
   margin: 10px 0 20px;
 `;
 
-const PostForm = ({ data }) => {
+const PostForm = () => {
   const dispatch = useDispatch();
   const imageInput = useRef();
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
@@ -23,8 +23,8 @@ const PostForm = ({ data }) => {
   }, [addPostDone]);
 
   const onSubmit = useCallback(() => {
-    dispatch(addPost(data));
-  }, [data]);
+    dispatch(addPost(text));
+  }, [text]);
 
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
