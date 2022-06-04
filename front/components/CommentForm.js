@@ -1,17 +1,36 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button } from "antd";
-import { useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
-import PropTypes from "prop-types";
+
+import { ADD_COMMENT_REQUEST } from "../reducers";
 
 const CommentForm = ({ post }) => {
-  const id = useSelector((state) => state.user.me && state.user.me.id);
+  const dispatch = useDispatch();
 
-  const [commentText, onChangeCommentText] = useInput("");
+  const id = useSelector((state) => state.user.me && state.user.me.id);
+  const addCommentDone = useSelector((state) => state.post);
+
+  const [commentText, onChangeCommentText, setCommentText] = useInput("");
+
+  useEffect(() => {
+    if (addCommentDone) {
+      setCommentText("");
+    }
+  }, [addCommentDone]);
 
   const onSubmitComment = useCallback(() => {
     console.log(post.id, commentText);
-  }, [commentText]);
+    dispatch({
+      type: ADD_COMMENT_REQUEST,
+      data: {
+        content: commentText,
+        postId: post.id,
+        userId,
+        id,
+      },
+    });
+  }, [commentText, id]);
 
   return (
     <Form onFinish={onSubmitComment}>
@@ -31,10 +50,6 @@ const CommentForm = ({ post }) => {
       </Form.Item>
     </Form>
   );
-};
-
-CommentForm.PropTypes = {
-  post: PropTypes.object.isRequired,
 };
 
 export default CommentForm;

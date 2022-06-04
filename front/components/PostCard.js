@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import PostImages from "./PostImages";
 import CommentForm from "./CommentForm";
 import PostCardContent from "./PostCardContent";
-import PropTypes from "prop-types";
 
 const PostCard = ({ post }) => {
   // 여기서 post는 index.js의 부모 인자에서  post={post} 로 받아왔다. 저 {post}는 결국 state에서 가져왔고!
@@ -92,17 +91,6 @@ const PostCard = ({ post }) => {
       <Comments /> */}
     </div>
   );
-};
-
-PostCard.PropTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number,
-    User: PropTypes.object,
-    content: PropTypes.string,
-    createdAt: PropTypes.object,
-    Comments: PropTypes.arrayOf(PropTypes.object),
-    Images: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
 };
 
 export default PostCard;

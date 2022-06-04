@@ -60,6 +60,8 @@ export const logoutRequestAction = () => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_REQUEST:
+      console.log("reducer login request active");
+
       return {
         ...state,
         logInLoading: true,
@@ -67,6 +69,8 @@ const reducer = (state = initialState, action) => {
         logInError: null,
       };
     case LOG_IN_SUCCESS:
+      console.log("reducer login success active");
+
       return {
         ...state,
         logInLoading: false,

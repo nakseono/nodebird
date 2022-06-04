@@ -19,6 +19,8 @@ function logInAPI(data) {
 
 function* logIn(action) {
   try {
+    console.log("saga logIn active");
+
     // const result = yield call(logInAPI, action.data);
     yield delay(1000);
 
@@ -26,6 +28,8 @@ function* logIn(action) {
       type: LOG_IN_SUCCESS,
       data: action.data,
     });
+
+    console.log("saga logInSuccess active");
   } catch (err) {
     yield put({
       type: LOG_IN_FAILURE,
@@ -74,6 +78,7 @@ function* signUp() {
 }
 
 function* watchLogIn() {
+  console.log("watchLogIn active");
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 function* watchLogOut() {
