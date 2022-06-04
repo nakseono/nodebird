@@ -25,7 +25,7 @@ const UserProfile = () => {
           <div key="followings">
             팔로잉
             <br />
-            {me.Follows.length}
+            {me.Followings.length}
           </div>,
           <div key="followings">
             팔로워

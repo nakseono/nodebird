@@ -11,7 +11,7 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-} from "../reducers";
+} from "../reducers/user";
 
 function logInAPI(data) {
   return axios.post("/api/login", data);
@@ -78,7 +78,6 @@ function* signUp() {
 }
 
 function* watchLogIn() {
-  console.log("watchLogIn active");
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 function* watchLogOut() {

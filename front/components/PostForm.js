@@ -3,12 +3,13 @@ import { Form, Input, Button } from "antd";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../reducers/post";
+import useInput from "../hooks/useInput";
 
 const PostWrapper = styled(Form)`
   margin: 10px 0 20px;
 `;
 
-const PostForm = () => {
+const PostForm = ({ data }) => {
   const dispatch = useDispatch();
   const imageInput = useRef();
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
