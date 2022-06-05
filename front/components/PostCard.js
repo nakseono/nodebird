@@ -7,15 +7,18 @@ import {
   RetweetOutlined,
   HeartTwoTone,
 } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PostImages from "./PostImages";
 import CommentForm from "./CommentForm";
 import PostCardContent from "./PostCardContent";
+import { REMOVE_POST_REQUEST } from "../reducers/post";
 
 const PostCard = ({ post }) => {
   // 여기서 post는 index.js의 부모 인자에서  post={post} 로 받아왔다. 저 {post}는 결국 state에서 가져왔고!
 
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me && state.user.me.id);
+  const { removePostLoading } = useSelector((state) => state.post);
 
   const [liked, setLiked] = useState(false);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
@@ -25,6 +28,10 @@ const PostCard = ({ post }) => {
   }, []);
   const onToggleComment = useCallback(() => {
     setCommentFormOpened((prevState) => !prevState);
+  }, []);
+
+  const onRemovePost = useCallback(() => {
+    dispatch({ type: REMOVE_POST_REQUEST, data: post.id });
   }, []);
 
   return (
@@ -50,7 +57,13 @@ const PostCard = ({ post }) => {
                 {id && post.User.id === id ? (
                   <>
                     <Button>수정</Button>
-                    <Button type="danger">삭제</Button>
+                    <Button
+                      type="danger"
+                      loading={removePostLoading}
+                      onClick={onRemovePost}
+                    >
+                      삭제
+                    </Button>
                   </>
                 ) : (
                   <Button>신고</Button>
