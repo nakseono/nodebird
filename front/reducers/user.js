@@ -58,13 +58,13 @@ const dummyUser = (data) => {
     nickname: "nakseono",
     Posts: [{ id: 1 }],
     Followings: [
-      { nickname: "dlwlrma" },
-      { nickname: "이지금" },
+      { nickname: "김낙떠" },
+      { nickname: "낙서노" },
       { nickname: "김낙서" },
     ],
     Followers: [
-      { nickname: "dlwlrma" },
-      { nickname: "이지금" },
+      { nickname: "김낙떠" },
+      { nickname: "낙서노" },
       { nickname: "김낙서" },
     ],
   };

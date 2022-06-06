@@ -51,7 +51,7 @@ export const dummyPost = (data) => ({
   content: data.content,
   User: {
     id: 1,
-    nickname: "이지금",
+    nickname: "김낙떠",
   },
   Images: [],
   Comments: [],
@@ -62,7 +62,7 @@ const dummyComments = (data) => ({
   content: data,
   User: {
     id: 1,
-    nickname: "dlwlrma",
+    nickname: "김낙서",
   },
 });
 
