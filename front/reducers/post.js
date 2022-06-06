@@ -1,5 +1,6 @@
 import shortId from "shortid";
 import produce from "immer";
+import faker from "faker";
 
 export const initialState = {
   mainPosts: [
@@ -97,6 +98,33 @@ const dummyComments = (data) => ({
     nickname: "dlwlrma",
   },
 });
+
+initialState.mainPosts = initialState.mainPosts.concat(
+  Array(20)
+    .fill()
+    .map(() => ({
+      id: shortId.generate(),
+      User: {
+        id: shortId.generate(),
+        nickname: faker.name.findName(),
+      },
+      content: faker.lorem.paragraph(),
+      Images: [
+        {
+          // src: faker.image.imageUrl(),
+        },
+      ],
+      Comments: [
+        {
+          User: {
+            id: shortId.generate(),
+            nickname: faker.name.findName(),
+          },
+          content: faker.lorem.sentence(),
+        },
+      ],
+    }))
+);
 
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {

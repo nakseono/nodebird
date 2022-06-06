@@ -12,7 +12,7 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <>
-        <img src={(images = [0].src)} alt={images[0].src} onClick={zoomOnOff} />
+        <img src={(images = [0].src)} alt={images} onClick={zoomOnOff} />
         {showImagesZoom && <ImagesZoom images={images} onClose={zoomOnOff} />}
       </>
     );
