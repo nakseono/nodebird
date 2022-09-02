@@ -65,11 +65,13 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post("https://localhost:3065/user", data);
+  console.log(`signUpAPI 실행`)
+  return axios.post("https://127.0.0.1:3065/user", data);
 }
 
 function* signUp(action) {
   try {
+    console.log(`sagas/signup 실행`)
     const result = yield call(signUpAPI, action.data);
     console.log(result);
     yield put({

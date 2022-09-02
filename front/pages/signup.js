@@ -22,7 +22,9 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const dispatch = useDispatch();
-  const { signUpLoading, signUpDone, signUpError } = useSelector((state) => state.user);
+  const { signUpLoading, signUpDone, signUpError } = useSelector(
+    (state) => state.user
+  );
 
   useEffect(() => {
     if (signUpDone) {
@@ -31,10 +33,10 @@ const SignUp = () => {
   }, [signUpDone]);
 
   useEffect(() => {
-    if(signUpError) {
+    if (signUpError) {
       alert(signUpError);
     }
-  }, [signUpError])
+  }, [signUpError]);
 
   const onChangePasswordCheck = useCallback(
     (e) => {
@@ -60,6 +62,7 @@ const SignUp = () => {
       return setTermError(true);
     }
     console.log(email, nickname, password);
+    console.log(`signup submit`);
     dispatch({
       type: SIGN_UP_REQUEST,
       data: { email, password, nickname },
