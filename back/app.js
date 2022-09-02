@@ -1,7 +1,7 @@
 const express = require("express");
 const postRouter = require("./routes/post");
 const userRouter = require("./routes/user");
-const db = require("./models/index");
+const db = require("./models");
 const cors = require("cors");
 
 const app = express();
@@ -15,7 +15,7 @@ db.sequelize
     console.log(err);
   });
 
-app.use(cors()); 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //! 위 두개의 use가 프론트에서 보낸 데이터를 req.body에 넣어주는 역할이다.

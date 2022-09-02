@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       // UserId: 1,
       // PostId: 3,
-      // -> 위 내용은 assiociate 즉, 관계를 설정하면 보이지않지만 생성되는것이라고 생각하면 된다.
+      // -> 위 내용은 associate 즉, 관계를 설정하면 보이지않지만 생성되는것이라고 생각하면 된다.
     },
     {
       charset: "utf8mb4",
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Comment.assiociate = (db) => {
+  Comment.associate = (db) => {
     db.Comment.belongsTo(db.User);
     db.Comment.belongsTo(db.Post);
   };
