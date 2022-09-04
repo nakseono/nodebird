@@ -65,8 +65,8 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  console.log(`signUpAPI 실행`)
-  return axios.post("https://127.0.0.1:3065/user", data);
+  console.log(`signUpAPI 실행, action.data : ${data}`)
+  return axios.post("http://localhost:3065/user", data);
 }
 
 function* signUp(action) {
