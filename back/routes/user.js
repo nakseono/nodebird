@@ -31,4 +31,8 @@ router.post("/", async (req, res, next) => { // POST /user || next를 넣으면 
   }
 });
 
+router.post('/login', (req, res, next) => { // POST /user/login
+  
+})
+
 module.exports = router;
