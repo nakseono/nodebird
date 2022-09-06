@@ -6,5 +6,5 @@ module.exports = () => {
 
   passport.deserializeUser(() => {});
 
-  local();
+  local(); // ./local/index.js 의 module.exports 가 실행되는 것.
 };
