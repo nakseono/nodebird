@@ -1,6 +1,6 @@
-const passport = requrie("passport");
-const local = require("./local");
-const { User } = require("./models");
+const passport = require("passport");
+const local = require("../local");
+const { User } = require("../models");
 
 module.exports = () => {
   passport.serializeUser((user, done) => { // 세션을 만들어주는 부분이다. cookie와 user.id를 연결해준다고 생각하면 될듯.
