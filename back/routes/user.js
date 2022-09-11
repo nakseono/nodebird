@@ -5,8 +5,7 @@ const passport = require("passport");
 
 const router = express.Router();
 
-router.post("/", async (req, res, next) => {
-  // POST /user || next를 넣으면 발생한 에러를 한방에 브라우저로 모아준다.
+router.post("/", async (req, res, next) => { // POST /user || next를 넣으면 발생한 에러를 한방에 브라우저로 모아준다.
   try {
     const exUser = await User.findOne({
       where: {
@@ -15,7 +14,8 @@ router.post("/", async (req, res, next) => {
     });
 
     if (exUser) {
-      return res.status(403).send("이미 사용중인 아이디입니다."); // 여기서 보내는 res에 대한 send 메시지는 sagas/user.js의 signup 부분 err.response.data 가 된다!
+      return res.status(403).send("이미 사용중인 아이디입니다.");
+      // 여기서 보내는 res에 대한 send 메시지는 sagas/user.js의 signup 부분 err.response.data 가 된다!
     }
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
