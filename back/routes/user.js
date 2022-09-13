@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { User } = require("../models"); // db 내에서 User 테이블을 가져온 것.
+const { User, Post } = require("../models"); // db 내에서 User 테이블을 가져온 것.
 const passport = require("passport");
 
 const router = express.Router();
@@ -36,25 +36,36 @@ router.post("/", async (req, res, next) => { // POST /user || next를 넣으면 
 
 // POST /user/login
 router.post("/login", (req, res, next) => {
-  console.log("router/user.js active")
   passport.authenticate("local", (err, user, info) => {
-    // passport/index.js의 local을 실행시킴.
     if (err) {
-      console.log(`error: ${error}`);
+      console.error(err);
       return next(err);
     }
-
     if (info) {
       return res.status(401).send(info.reason);
     }
-
     return req.login(user, async (loginErr) => {
-      // req.login 으로 로그인을 실행할 수 있고, 서버에서 로그인을 처리하였더라도 패스포트도 한번 더 처리하기 때문에 혹시몰라서 loginErr 까지 만들어준다.
       if (loginErr) {
         console.error(loginErr);
         return next(loginErr);
       }
-      return res.status(200).json(user); // 에러 없이 login을 성공하면 res.json(user)로 user 정보를 넘겨주는 것 까지 하면 로그인 프로세스는 정말 끝.
+      const fullUserWithoutPassword = await User.findOne({
+        where: { id: user.id },
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [{
+          model: Post,
+        }, {
+          model: User,
+          as: "Followings",
+        }, {
+          model: User,
+          as: "Followers",
+        }
+        ],
+      });
+      return res.status(200).json(fullUserWithoutPassword);
     });
   })(req, res, next);
 });
