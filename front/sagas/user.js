@@ -20,12 +20,15 @@ import {
 } from "../reducers/user";
 
 function logInAPI(data) {
+  console.log("login API active")
   return axios.post("/user/login", data);
 }
 
 function* logIn(action) {
   try {
+    console.log(`saga logIn start, action.data : ${JSON.stringify(action.data)}`)
     const result = yield call(logInAPI, action.data);
+    console.log(`login api result : ${result}`);
 
     yield put({
       type: LOG_IN_SUCCESS,

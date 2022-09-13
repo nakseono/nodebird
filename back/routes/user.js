@@ -36,10 +36,11 @@ router.post("/", async (req, res, next) => { // POST /user || next를 넣으면 
 
 // POST /user/login
 router.post("/login", (req, res, next) => {
+  console.log("router/user.js active")
   passport.authenticate("local", (err, user, info) => {
     // passport/index.js의 local을 실행시킴.
     if (err) {
-      console.error(error);
+      console.log(`error: ${error}`);
       return next(err);
     }
 
