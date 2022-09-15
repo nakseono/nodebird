@@ -6,6 +6,7 @@ import {
   put,
   delay,
   throttle,
+  call,
 } from "redux-saga/effects";
 import shortId from "shortid";
 
@@ -49,26 +50,23 @@ function* loadPosts(action) {
 }
 
 function addPostAPI(data) {
-  return axios.post("/api/post", data);
+  return axios.post("/post", { content: data });
+  // data의 이름을 content로 굳이 적어서 넘겨주는 이유는 기본적으로 dispatch(addPost)를 해서 넘어온 데이터는
+  // text의 형태이기 때문에 잘 넘겨주기 위해서는 이름을 지어서 넘겨주는 과정이 필요하다.
 }
 
 function* addPost(action) {
   try {
-    // const result = yield call(addPostAPI, action.data);
-    yield delay(1000);
-    const id = shortId.generate();
+    const result = yield call(addPostAPI, action.data);
 
     yield put({
       type: ADD_POST_SUCCESS,
-      data: {
-        id,
-        content: action.data,
-      },
+      data: result.data,
     });
 
     yield put({
       type: ADD_POST_TO_ME,
-      data: id,
+      data: result.data.id,
     });
   } catch (err) {
     yield put({
@@ -106,16 +104,16 @@ function* removePost(action) {
 }
 
 function addCommentAPI(data) {
-  return axios.post(`/api/post/${data.postId}/comment`, data);
+  return axios.post(`/post/${data.postId}/comment`, data);
 }
 
 function* addComment(action) {
   try {
-    yield delay(1000);
+    const result = yield call(addCommentAPI, action.data);
 
     yield put({
       type: ADD_COMMENT_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
