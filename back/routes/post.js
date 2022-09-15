@@ -18,11 +18,11 @@ router.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/:postId/comment", isLoggedIn, async (req, res, next) => {
+router.post("/:postId/comment", isLoggedIn, async (req, res, next) => { // :postId 는 동적으로 바뀌는 params.
   // POST /post
   try {
     const post = await Post.findOne({
-      where: { id: req.params.postId },
+      where: { id: req.params.postId }, // params(= parameter) 는 주소부문에서 동적으로 바뀌는 부문이다.
     });
     if (!post) {
       return res.status(403).send("존재하지 않는 게시글 입니다.");
