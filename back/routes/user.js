@@ -7,7 +7,47 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-router.post("/", isNotLoggedIn, async (req, res, next) => { // POST /user || next를 넣으면 발생한 에러를 한방에 브라우저로 모아준다.
+router.get("/", async (req, res, next) => {
+  // Get /user
+  try {
+    if (req.user) {
+      // req.user 는 passport로 인해 로그인을 한 상태이면 상시 유지되므로.
+
+      const fullUserWithoutPassword = await User.findOne({
+        where: { id: req.user.id },
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          {
+            model: Post,
+            attributes: ["id"], // 서버로부터 프론트엔드에 필요한 데이터만 보내주는 것.
+            // 게시글 수, 팔로잉, 팔로워 숫자만 파악하려면 굳이 하나하나 데이터를 다 가져올 필요 없이 id만 가져온다.
+          },
+          {
+            model: User,
+            as: "Followings",
+            attributes: ["id"],
+          },
+          {
+            model: User,
+            as: "Followers",
+            attributes: ["id"],
+          },
+        ],
+      });
+      return res.status(200).json(fullUserWithoutPassword);
+    } else {
+      res.status(200).json(null);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post("/", isNotLoggedIn, async (req, res, next) => {
+  // POST /user || next를 넣으면 발생한 에러를 한방에 브라우저로 모아준다.
   try {
     const exUser = await User.findOne({
       where: {
@@ -56,15 +96,18 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
         attributes: {
           exclude: ["password"],
         },
-        include: [{
-          model: Post,
-        }, {
-          model: User,
-          as: "Followings",
-        }, {
-          model: User,
-          as: "Followers",
-        }
+        include: [
+          {
+            model: Post,
+          },
+          {
+            model: User,
+            as: "Followings",
+          },
+          {
+            model: User,
+            as: "Followers",
+          },
         ],
       });
       return res.status(200).json(fullUserWithoutPassword);

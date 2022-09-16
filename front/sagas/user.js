@@ -2,6 +2,9 @@ import axios from "axios";
 import { all, fork, takeLatest, put, delay, call } from "redux-saga/effects";
 
 import {
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
@@ -19,16 +22,34 @@ import {
   UNFOLLOW_FAILURE,
 } from "../reducers/user";
 
+function loadUserAPI(data) {
+  return axios.get("/user");
+}
+
+function* loadUser(action) {
+  try {
+    const result = yield call(loadUserAPI, action.data);
+
+    yield put({
+      type: LOAD_USER_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_USER_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function logInAPI(data) {
-  console.log("login API active")
+  console.log("login API active");
   return axios.post("/user/login", data);
 }
 
 function* logIn(action) {
   try {
-    console.log(`saga logIn start, action.data : ${JSON.stringify(action.data)}`)
     const result = yield call(logInAPI, action.data);
-    console.log(`login api result : ${result}`);
 
     yield put({
       type: LOG_IN_SUCCESS,
@@ -122,6 +143,9 @@ function* unfollow(action) {
   }
 }
 
+function* watchLoadUser() {
+  yield takeLatest(LOAD_USER_REQUEST, loadUser);
+}
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
