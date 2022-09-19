@@ -1,6 +1,7 @@
 const express = require("express");
 const postRouter = require("./routes/post");
 const userRouter = require("./routes/user");
+const postsRouter = require("./routes/posts");
 const db = require("./models");
 const cors = require("cors");
 
@@ -8,6 +9,8 @@ const passport = require("passport");
 const passportConfig = require("./passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+
+const morgan = require("morgan");
 
 const dotenv = require("dotenv");
 
@@ -25,6 +28,8 @@ db.sequelize
   });
 
 passportConfig();
+
+app.use(morgan("dev"));
 
 app.use(
   cors({
@@ -50,6 +55,7 @@ app.use(passport.session());
 
 app.use("/post", postRouter); // route 분기해주면서 prefix 붙은 것.
 app.use("/user", userRouter); // route 분기해주면서 prefix 붙은 것.
+app.use("/posts", postsRouter);
 
 app.listen(3065, () => {
   console.log("서버 실행 중");
