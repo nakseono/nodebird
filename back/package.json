@@ -18,7 +18,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "nodemon": "2",
-    "passport": "^0.6.0",
+    "passport": "^0.5.3",
     "passport-local": "^1.0.0",
     "sequelize": "^6.21.4",
     "sequelize-cli": "^6.4.1"

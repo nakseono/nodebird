@@ -7,9 +7,11 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => { // Get /user
+router.get("/", async (req, res, next) => {
+  // Get /user
   try {
-    if (req.user) { // req.user 는 passport로 인해 로그인을 한 상태이면 상시 유지되므로 불러와진다면 로그인이 된 상태인 것이다.
+    if (req.user) {
+      // req.user 는 passport로 인해 로그인을 한 상태이면 상시 유지되므로 불러와진다면 로그인이 된 상태인 것이다.
       const fullUserWithoutPassword = await User.findOne({
         where: { id: req.user.id },
         attributes: {
@@ -35,7 +37,6 @@ router.get("/", async (req, res, next) => { // Get /user
       });
       return res.status(200).json(fullUserWithoutPassword);
     } else {
-      console.log("user 없음");
       res.status(200).json(null);
     }
   } catch (error) {
@@ -117,7 +118,7 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
 router.post("/logout", isLoggedIn, (req, res) => {
   req.logout();
   req.session.destroy();
-  req.send("ok");
+  res.send("ok");
 });
 
 module.exports = router;

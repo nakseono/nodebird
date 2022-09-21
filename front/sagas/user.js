@@ -23,14 +23,12 @@ import {
 } from "../reducers/user";
 
 function loadUserAPI() {
-  console.log('loadUserApi Call');
   return axios.get("/user");
 }
 
 function* loadUser(action) {
   try {
     const result = yield call(loadUserAPI, action.data);
-    console.log(`loadUser Result : ${JSON.stringify(result)}`);
 
     yield put({
       type: LOAD_USER_SUCCESS,
@@ -45,7 +43,6 @@ function* loadUser(action) {
 }
 
 function logInAPI(data) {
-  console.log("login API active");
   return axios.post("/user/login", data);
 }
 
@@ -66,17 +63,17 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post("/logout");
+  return axios.post("/user/logout");
 }
 
 function* logOut() {
   try {
     yield call(logOutAPI);
-
     yield put({
       type: LOG_OUT_SUCCESS,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOG_OUT_FAILURE,
       error: err.response.data,
@@ -85,15 +82,12 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  console.log(`signUpAPI 실행, action.data : ${data}`);
   return axios.post("/user", data);
 }
 
 function* signUp(action) {
   try {
-    console.log(`sagas/signup 실행`);
     const result = yield call(signUpAPI, action.data);
-    console.log(result);
     yield put({
       type: SIGN_UP_SUCCESS,
     });
