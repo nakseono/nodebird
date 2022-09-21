@@ -22,13 +22,15 @@ import {
   UNFOLLOW_FAILURE,
 } from "../reducers/user";
 
-function loadUserAPI(data) {
+function loadUserAPI() {
+  console.log('loadUserApi Call');
   return axios.get("/user");
 }
 
 function* loadUser(action) {
   try {
     const result = yield call(loadUserAPI, action.data);
+    console.log(`loadUser Result : ${JSON.stringify(result)}`);
 
     yield put({
       type: LOAD_USER_SUCCESS,
@@ -64,7 +66,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post("/api/logout");
+  return axios.post("/logout");
 }
 
 function* logOut() {
@@ -164,6 +166,7 @@ function* watchUnfollow() {
 
 export default function* userSaga() {
   yield all([
+    fork(watchLoadUser),
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchSignUp),

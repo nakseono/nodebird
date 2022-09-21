@@ -12,7 +12,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
       UserId: req.user.id,
     });
 
-    const fullPost = await Post.fineOne({
+    const fullPost = await Post.findOne({
       where: { id: post.id },
       include: [
         {

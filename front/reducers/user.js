@@ -100,7 +100,7 @@ const reducer = (state = initialState, action) => {
         break;
       case LOAD_USER_SUCCESS:
         draft.loadUserLoading = false;
-        draft.me = action.user;
+        draft.me = action.data;
         draft.loadUserDone = true;
         break;
       case LOAD_USER_FAILURE:
