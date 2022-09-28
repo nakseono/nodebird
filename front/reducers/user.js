@@ -58,25 +58,6 @@ export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
-const dummyUser = (data) => {
-  return {
-    ...data,
-    id: 1,
-    nickname: "nakseono",
-    Posts: [{ id: 1 }],
-    Followings: [
-      { nickname: "김낙떠" },
-      { nickname: "낙서노" },
-      { nickname: "김낙서" },
-    ],
-    Followers: [
-      { nickname: "김낙떠" },
-      { nickname: "낙서노" },
-      { nickname: "김낙서" },
-    ],
-  };
-};
-
 export const loginRequestAction = (data) => {
   return {
     type: LOG_IN_REQUEST,
@@ -107,6 +88,7 @@ const reducer = (state = initialState, action) => {
         draft.loadUserLoading = false;
         draft.loadUserError = action.error;
         break;
+
       case FOLLOW_REQUEST:
         draft.followLoading = true;
         draft.followError = null;
@@ -121,6 +103,7 @@ const reducer = (state = initialState, action) => {
         draft.followLoading = false;
         draft.followError = action.error;
         break;
+
       case UNFOLLOW_REQUEST:
         draft.unfollowLoading = true;
         draft.unfollowError = null;
@@ -137,6 +120,7 @@ const reducer = (state = initialState, action) => {
         draft.unfollowLoading = false;
         draft.unfollowError = action.error;
         break;
+
       case LOG_IN_REQUEST:
         draft.logInLoading = true;
         draft.logInError = null;
@@ -151,6 +135,7 @@ const reducer = (state = initialState, action) => {
         draft.logInLoading = false;
         draft.logInError = action.error;
         break;
+
       case LOG_OUT_REQUEST:
         draft.logOutLoading = true;
         draft.logOutError = null;
@@ -165,6 +150,7 @@ const reducer = (state = initialState, action) => {
         draft.logOutLoading = false;
         draft.logOutError = action.error;
         break;
+
       case SIGN_UP_REQUEST:
         draft.signUpLoading = true;
         draft.signUpError = null;
@@ -178,12 +164,14 @@ const reducer = (state = initialState, action) => {
         draft.signUpLoading = false;
         draft.signUpError = action.error;
         break;
+
       case CHANGE_NICKNAME_REQUEST:
         draft.changeNicknameLoading = true;
         draft.changeNicknameError = null;
         draft.changeNicknameDone = false;
         break;
       case CHANGE_NICKNAME_SUCCESS:
+        draft.me.nickanme = action.data.nickname;
         draft.changeNicknameLoading = false;
         draft.changeNicknameDone = true;
         break;
@@ -191,6 +179,7 @@ const reducer = (state = initialState, action) => {
         draft.changeNicknameLoading = false;
         draft.changeNicknameError = action.error;
         break;
+
       case ADD_POST_TO_ME:
         draft.me.Posts.unshift({ id: action.data });
         break;
