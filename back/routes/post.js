@@ -11,7 +11,6 @@ router.post("/", isLoggedIn, async (req, res, next) => {
       content: req.body.content,
       UserId: req.user.id,
     });
-
     const fullPost = await Post.findOne({
       where: { id: post.id },
       include: [
@@ -23,28 +22,21 @@ router.post("/", isLoggedIn, async (req, res, next) => {
           include: [
             {
               model: User, // 댓글 작성자
-              attributes: {
-                exclude: ["password"],
-              },
+              attributes: ["id", "nickname"],
             },
           ],
         },
         {
           model: User, // 게시글 작성자
-          attributes: {
-            exclude: ["password"],
-          },
+          attributes: ["id", "nickname"],
         },
         {
           model: User, // 좋아요 누른 사람
           as: "Likers",
-          attributes: {
-            exclude: ["password"],
-          },
+          attributes: ["id"],
         },
       ],
     });
-
     res.status(201).json(fullPost);
   } catch (error) {
     console.error(error);
@@ -128,13 +120,15 @@ router.delete("/:postId/like", isLoggedIn, async (req, res, next) => {
 });
 
 router.delete("/:postId", isLoggedIn, async (req, res, next) => {
-  //! DELETE /post/10
+  // DELETE /post/10
   try {
     await Post.destroy({
-      where: { id: req.params.postId, UserId: req.user.id },
+      where: {
+        id: req.params.postId,
+        UserId: req.user.id,
+      },
     });
-
-    res.status(200).json({ PostId: parseInt(req.params.postId) });
+    res.status(200).json({ PostId: parseInt(req.params.postId, 10) });
   } catch (error) {
     console.error(error);
     next(error);

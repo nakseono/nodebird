@@ -150,7 +150,7 @@ function changeNicknameAPI(data) {
 function* changeNickname(action) {
   try {
     const result = yield call(changeNicknameAPI, action.data);
-
+    
     yield put({
       type: CHANGE_NICKNAME_SUCCESS,
       data: result.data,
