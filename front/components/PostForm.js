@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../reducers/post";
 import useInput from "../hooks/useInput";
 import { UPLOAD_IMAGES_REQUEST } from "../reducers/post";
+import image from "../../back/models/image";
 
 const PostWrapper = styled(Form)`
   margin: 10px 0 20px;
@@ -35,6 +36,7 @@ const PostForm = () => {
     console.log("images", e.target.files);
 
     const imageFormData = new FormData();
+
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append("image", f);
     });

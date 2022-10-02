@@ -169,12 +169,23 @@ function* unlikePost(action) {
 }
 
 function uploadImagesAPI(data) {
+  console.log("uploadImagesAPI on");
+  for (const e of data) {
+    console.log(e);
+  }
   return axios.post(`/post/images`, data);
 }
 
 function* uploadImages(action) {
   try {
+    for (const e of action.data) {
+      console.log(e);
+    }
+
     const result = yield call(uploadImagesAPI, action.data);
+    if (!result) {
+      console.log(`result자체가 안넘어옴`);
+    }
 
     yield put({
       type: UPLOAD_IMAGES_SUCCESS,

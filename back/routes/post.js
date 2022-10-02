@@ -152,18 +152,17 @@ const upload = multer({
     },
     filename(req, file, done) {
       // 선호.png
-      const ext = path.extname(file.originalname); // 확장자 추출(.png)
+      const ext = path.extname(file.originalname); // .png
       const basename = path.basename(file.originalname, ext); // 선호
-      done(null, basename + new Date().getTime() + ext); // 선호991214.png
+      done(null, basename + new Date().getTime() + ext); // 선호.png
     },
   }),
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
 });
 
-router.post(
-  "/images",
-  isLoggedIn,
-  upload.array("image"),
-  async (req, res, next) => {}
-);
+router.post("/images", isLoggedIn, upload.array("image"), (req, res, next) => {
+  console.log(req.files);
+  res.json(req.files.map((v) => v.filename));
+});
 
 module.exports = router;
