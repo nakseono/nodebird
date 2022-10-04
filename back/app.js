@@ -4,6 +4,7 @@ const userRouter = require("./routes/user");
 const postsRouter = require("./routes/posts");
 const db = require("./models");
 const cors = require("cors");
+const path = require("path");
 
 const passport = require("passport");
 const passportConfig = require("./passport");
@@ -37,6 +38,7 @@ app.use(
     credentials: true,
   })
 );
+app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //! 위 두개의 use가 프론트에서 보낸 데이터를 req.body에 넣어주는 역할이다.

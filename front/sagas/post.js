@@ -57,7 +57,7 @@ function* loadPosts(action) {
 }
 
 function addPostAPI(data) {
-  return axios.post("/post", { content: data });
+  return axios.post("/post", data);
   // data의 이름을 content로 굳이 적어서 넘겨주는 이유는 기본적으로 dispatch(addPost)를 해서 넘어온 데이터는
   // text의 형태이기 때문에 잘 넘겨주기 위해서는 이름을 지어서 넘겨주는 과정이 필요하다.
 }
@@ -169,19 +169,11 @@ function* unlikePost(action) {
 }
 
 function uploadImagesAPI(data) {
-  console.log("uploadImagesAPI on");
-  for (const e of data) {
-    console.log(e);
-  }
   return axios.post(`/post/images`, data);
 }
 
 function* uploadImages(action) {
   try {
-    for (const e of action.data) {
-      console.log(e);
-    }
-
     const result = yield call(uploadImagesAPI, action.data);
     if (!result) {
       console.log(`result자체가 안넘어옴`);
