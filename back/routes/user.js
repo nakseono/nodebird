@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   // Get /user
+  // console.log(req.headers);
   try {
     if (req.user) {
       // req.user 는 passport로 인해 로그인을 한 상태이면 상시 유지되므로 불러와진다면 로그인이 된 상태인 것이다.
